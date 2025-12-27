@@ -1,0 +1,263 @@
+/* Calendar-style Timetable Enhancements */
+
+/* Hover effect for cards */
+.hover-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(139, 127, 216, 0.25) !important;
+}
+
+/* Class card hover */
+.class-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.class-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(139, 127, 216, 0.2) !important;
+}
+
+/* Timetable class item styles */
+.timetable-class-item {
+    transition: all 0.3s ease;
+}
+
+.timetable-class-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(139, 127, 216, 0.2);
+}
+
+.hover-shadow-lg {
+    transition: box-shadow 0.3s ease;
+}
+
+.hover-shadow-lg:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+/* Calendar day colors */
+.calendar-day-monday {
+    border-left-color: #8B7FD8 !important;
+}
+
+.calendar-day-tuesday {
+    border-left-color: #9D8FF5 !important;
+}
+
+.calendar-day-wednesday {
+    border-left-color: #B8A4FF !important;
+}
+
+.calendar-day-thursday {
+    border-left-color: #C8B6FF !important;
+}
+
+.calendar-day-friday {
+    border-left-color: #D8C4FF !important;
+}
+
+.calendar-day-saturday {
+    border-left-color: #E8D5FF !important;
+}
+
+/* Time badge styling */
+.time-badge {
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
+}
+
+/* Faculty info styling */
+.faculty-info {
+    background: linear-gradient(135deg, rgba(139, 127, 216, 0.1), rgba(184, 164, 255, 0.05));
+    border-radius: 8px;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .class-card {
+        margin-bottom: 0.75rem !important;
+    }
+
+    .hover-card:hover {
+        transform: none;
+    }
+}
+
+/* Animation for cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-animated {
+    animation: fadeInUp 0.4s ease forwards;
+}
+
+/* Stagger animation for multiple cards */
+.card-animated:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.card-animated:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.card-animated:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.card-animated:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.card-animated:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.card-animated:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+/* ===== TIMETABLE CALENDAR TABLE STYLES ===== */
+
+.timetable-calendar-wrapper {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.timetable-calendar-header {
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--light-lavender, #E8E4F9);
+}
+
+.timetable-table {
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.timetable-table thead th {
+    padding: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+    border: none;
+}
+
+.timetable-table tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+    border-color: var(--light-lavender, #E8E4F9);
+}
+
+.timetable-table tbody tr:hover {
+    background-color: rgba(139, 127, 216, 0.05);
+}
+
+.timetable-table .day-cell {
+    font-weight: 600;
+    color: var(--text-primary, #5B4B8A);
+    white-space: nowrap;
+}
+
+.timetable-table .classes-cell {
+    background: white;
+}
+
+/* Timetable Class Card */
+.timetable-class-card {
+    min-width: 180px;
+    max-width: 220px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #8B7FD8 0%, #B8A4FF 100%);
+    color: white;
+    box-shadow: 0 3px 10px rgba(139, 127, 216, 0.3);
+    transition: all 0.3s ease;
+}
+
+.timetable-class-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(139, 127, 216, 0.4);
+}
+
+.timetable-class-card .class-time {
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.timetable-class-card .class-name {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 6px;
+}
+
+.timetable-class-card .class-room,
+.timetable-class-card .class-teacher {
+    font-size: 0.8rem;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.timetable-class-card .class-room i,
+.timetable-class-card .class-teacher i {
+    font-size: 0.75rem;
+}
+
+/* No classes text */
+.timetable-table .text-muted.fst-italic {
+    color: #9D8FF5 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .timetable-class-card {
+        min-width: 150px;
+        max-width: 180px;
+        padding: 10px 12px;
+    }
+
+    .timetable-class-card .class-name {
+        font-size: 0.9rem;
+    }
+}
+
+/* Mobile nav pills styling */
+#pills-tab .nav-link {
+    background: var(--light-lavender, #E8E4F9);
+    color: var(--text-primary, #5B4B8A);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+#pills-tab .nav-link.active {
+    background: linear-gradient(135deg, #8B7FD8, #B8A4FF);
+    color: white;
+}

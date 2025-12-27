@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SmartAttend</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../assets/css/modern.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/admin-dashboard.css">
+</head>
+
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
+        <div class="navbar-container">
+            <!-- Logo -->
+            <div class="navbar-brand">
+                <div class="brand-icon">
+                    <i class="bi bi-shield-lock-fill"></i>
+                </div>
+                <span class="brand-text">SmartAttend</span>
+            </div>
+
+            <!-- Navigation Menu -->
+            <div class="navbar-menu">
+                <a href="#dashboard-section" class="nav-item active" data-section="dashboard-section">
+                    <i class="bi bi-grid-3x3-gap"></i> Dashboard
+                </a>
+                <a href="#users-section" class="nav-item" data-section="users-section">
+                    <i class="bi bi-people"></i> Users
+                </a>
+                <a href="#timetable-section" class="nav-item" data-section="timetable-section">
+                    <i class="bi bi-calendar3"></i> Timetable
+                </a>
+                <a href="#reports-section" class="nav-item" data-section="reports-section">
+                    <i class="bi bi-graph-up"></i> Reports
+                </a>
+            </div>
+
+            <!-- Right Side Actions -->
+            <div class="navbar-actions">
+                <button class="icon-button" title="Settings" onclick="navigateToSection('settings-section')">
+                    <i class="bi bi-gear"></i>
+                </button>
+                <div class="dropdown">
+                    <button class="icon-button notification-bell" title="Notifications" type="button">
+                        <i class="bi bi-bell"></i>
+                        <span class="notification-count notification-badge" style="display: none;"></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end" id="notificationDropdown"
+                        style="width: 320px; max-height: 400px; overflow-y: auto;">
+                        <h6 class="dropdown-header">Notifications</h6>
+                        <div id="notificationList">
+                            <div class="dropdown-item text-center text-muted">
+                                <div class="spinner-border spinner-border-sm" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="profile-button" type="button" id="profileDropdown" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img id="profileImage"
+                            src="https://ui-avatars.com/api/?name=Admin&background=8B7FD8&color=fff&bold=true"
+                            alt="Admin" class="profile-image">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item" href="#"
+                                onclick="navigateToSection('profile-section'); return false;"><i
+                                    class="bi bi-person me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#"
+                                onclick="navigateToSection('settings-section'); return false;"><i
+                                    class="bi bi-gear me-2"></i>Settings</a></li>
+                        <li><a class="dropdown-item" href="#"
+                                onclick="navigateToSection('geofencing-section'); return false;"><i
+                                    class="bi bi-geo-alt me-2"></i>Geofencing</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-danger" href="#" onclick="logout(); return false;"><i
+                                    class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="content-wrapper">
+
+            <!-- Dashboard Section -->
+            <div id="dashboard-section" class="page-section active">
+
+                <!-- Greeting -->
+                <div class="greeting-section">
+                    <h1 class="greeting-title">Hello, <span class="highlight" id="adminName">Administrator</span> 👋
+                    </h1>
+                    <p class="greeting-subtitle">How is the system performing today?</p>
+                </div>
+
+                <!-- Dashboard Grid -->
+                <div class="dashboard-grid">
+
+                    <!-- Left Column - Stats Cards -->
+                    <div class="stats-column">
+
+                        <!-- System Health Card -->
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-label">System Health</span>
+                                <i class="bi bi-activity"></i>
+                            </div>
+                            <div class="stat-main">
+                                <span class="stat-status">Excellent</span>
+                                <span class="stat-value">98%</span>
+                            </div>
+                            <div class="stat-progress">
+                                <div class="progress-bar" style="width: 98%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Active Users Card -->
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-label">Active Users</span>
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <div class="stat-main">
+                                <span class="stat-status">Online</span>
+                                <span class="stat-value">247</span>
+                            </div>
+                        </div>
+
+                        <!-- Attendance Rate Card -->
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <span class="stat-label">Attendance Rate</span>
+                                <i class="bi bi-check-circle"></i>
+                            </div>
+                            <div class="stat-main">
+                                <span class="stat-status">Standard</span>
+                                <span class="stat-value">87%</span>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="activity-card">
+                            <div class="activity-header">
+                                <h3>Recent Activity</h3>
+                                <button class="filter-btn">
+                                    <span>Filters</span>
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="bi bi-person-plus"></i>
+                                    </div>
+                                    <div class="activity-details">
+                                        <div class="activity-title">New Student Registered</div>
+                                        <div class="activity-time">2 hours ago</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="bi bi-calendar-check"></i>
+                                    </div>
+                                    <div class="activity-details">
+                                        <div class="activity-title">Timetable Updated</div>
+                                        <div class="activity-time">5 hours ago</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <i class="bi bi-megaphone"></i>
+                                    </div>
+                                    <div class="activity-details">
+                                        <div class="activity-title">Notice Posted</div>
+                                        <div class="activity-time">1 day ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Center Column - Main Content -->
+                    <div class="center-column">
+
+                        <!-- Illustration/Image Section -->
+                        <div class="illustration-card">
+                            <div class="illustration-content">
+                                <svg viewBox="0 0 200 200" class="dashboard-illustration">
+                                    <defs>
+                                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#8B7FD8;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#B8A4FF;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="100" cy="100" r="80" fill="url(#grad1)" opacity="0.2" />
+                                    <circle cx="100" cy="100" r="60" fill="url(#grad1)" opacity="0.3" />
+                                    <path d="M 100 40 Q 60 60 70 100 T 100 160 Q 140 140 130 100 T 100 40"
+                                        fill="url(#grad1)" opacity="0.8" />
+                                </svg>
+                                <div class="illustration-badge">
+                                    <i class="bi bi-shield-check"></i>
+                                    <span>Secure</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Weekly Performance Chart -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <div>
+                                    <h3>System Performance</h3>
+                                    <p class="text-muted">This week</p>
+                                </div>
+                                <select class="time-select">
+                                    <option>Week</option>
+                                    <option>Month</option>
+                                    <option>Year</option>
+                                </select>
+                            </div>
+                            <div class="chart-content">
+                                <canvas id="performanceChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Active Tasks Progress -->
+                        <div class="progress-card">
+                            <div class="progress-header">
+                                <h3>Active Tasks <span class="text-muted">this week</span></h3>
+                                <span class="progress-percentage">84%</span>
+                            </div>
+                            <div class="progress-items">
+                                <div class="progress-item">
+                                    <span class="progress-label">User Management</span>
+                                    <div class="progress-bar-container">
+                                        <div class="progress-fill" style="width: 75%"></div>
+                                    </div>
+                                    <span class="progress-value">75%</span>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="progress-label">Attendance Tracking</span>
+                                    <div class="progress-bar-container">
+                                        <div class="progress-fill purple-fill" style="width: 92%"></div>
+                                    </div>
+                                    <span class="progress-value">92%</span>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="progress-label">Notice Management</span>
+                                    <div class="progress-bar-container">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span class="progress-value">85%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Right Column - Quick Actions -->
+                    <div class="actions-column">
+
+                        <!-- Quick Stats Card -->
+                        <div class="quick-stats-card">
+                            <div class="quick-stat-item">
+                                <i class="bi bi-people-fill"></i>
+                                <div>
+                                    <div class="quick-stat-value">1,247</div>
+                                    <div class="quick-stat-label">Total Users</div>
+                                </div>
+                            </div>
+                            <div class="quick-stat-item">
+                                <i class="bi bi-calendar-check"></i>
+                                <div>
+                                    <div class="quick-stat-value">342</div>
+                                    <div class="quick-stat-label">Sessions Today</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="quick-actions-card">
+                            <h3>Quick Actions</h3>
+                            <div class="action-buttons">
+                                <button class="action-btn-primary" onclick="navigateToSection('users-section')">
+                                    <i class="bi bi-person-plus"></i>
+                                    <span>Add User</span>
+                                </button>
+                                <button class="action-btn-text" onclick="navigateToSection('timetable-section')">
+                                    <i class="bi bi-calendar-plus"></i>
+                                    <span>Update Schedule</span>
+                                </button>
+                                <button class="action-btn-text" onclick="navigateToSection('reports-section')">
+                                    <i class="bi bi-megaphone"></i>
+                                    <span>Post Notice</span>
+                                </button>
+                                <button class="action-btn-text" onclick="navigateToSection('geofencing-section')">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <span>Geofencing</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Upcoming Events -->
+                        <div class="events-card">
+                            <div class="events-header">
+                                <h3>Upcoming Events</h3>
+                                <i class="bi bi-arrow-right-circle"></i>
+                            </div>
+                            <div class="event-item">
+                                <div class="event-date">
+                                    <span class="day">28</span>
+                                    <span class="month">DEC</span>
+                                </div>
+                                <div class="event-details">
+                                    <div class="event-title">Faculty Meeting</div>
+                                    <div class="event-time">10:00 AM</div>
+                                </div>
+                            </div>
+                            <div class="event-item">
+                                <div class="event-date">
+                                    <span class="day">01</span>
+                                    <span class="month">JAN</span>
+                                </div>
+                                <div class="event-details">
+                                    <div class="event-title">Semester Break</div>
+                                    <div class="event-time">All Day</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- User Management Section -->
+            <div id="users-section" class="page-section">
+                <div class="section-header">
+                    <h2><i class="bi bi-people"></i> User Management</h2>
+                    <p>Register and manage system users</p>
+                </div>
+
+                <div class="content-card">
+                    <h3><i class="bi bi-person-plus-fill"></i> User Registration</h3>
+                    <form id="registerForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="regName" required
+                                    placeholder="e.g. John Doe">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="regEmail" required
+                                    placeholder="name@college.edu">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Role</label>
+                                <select class="form-select" id="regRole" required onchange="toggleStudentFields()">
+                                    <option value="" selected disabled>Select Role...</option>
+                                    <option value="Faculty">Faculty (Teacher)</option>
+                                    <option value="Student">Student</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="text" class="form-control" id="regPassword" value="College@123" readonly>
+                                <small class="text-muted">Default password set.</small>
+                            </div>
+                        </div>
+
+                        <div id="studentFields" style="display: none;">
+                            <hr class="section-divider">
+                            <h5><i class="bi bi-mortarboard me-2"></i>Student Details</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Roll Number</label>
+                                    <input type="text" class="form-control" id="regRoll" placeholder="e.g. 2023CSE001">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Batch *</label>
+                                    <select class="form-select" id="regBatch" required>
+                                        <option value="" disabled selected>Select Batch (Create batch first)</option>
+                                    </select>
+                                    <small class="text-muted">Create batches in Timetable section first</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Semester</label>
+                                    <select class="form-select" id="regSem">
+                                        <option value="1">1st Semester</option>
+                                        <option value="2">2nd Semester</option>
+                                        <option value="3">3rd Semester</option>
+                                        <option value="4">4th Semester</option>
+                                        <option value="5">5th Semester</option>
+                                        <option value="6">6th Semester</option>
+                                        <option value="7">7th Semester</option>
+                                        <option value="8">8th Semester</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Branch</label>
+                                    <select class="form-select" id="regBranch">
+                                        <option value="CSE">Computer Science</option>
+                                        <option value="IT">Information Technology</option>
+                                        <option value="ECE">Electronics & Communication</option>
+                                        <option value="EEE">Electrical Engineering</option>
+                                        <option value="MECH">Mechanical Engineering</option>
+                                        <option value="CIVIL">Civil Engineering</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">Section</label>
+                                    <select class="form-select" id="regSection">
+                                        <option value="A">Section A</option>
+                                        <option value="B">Section B</option>
+                                        <option value="C">Section C</option>
+                                        <option value="D">Section D</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mt-3">
+                            <i class="bi bi-person-plus me-2"></i>Create User
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Registered Users Table -->
+                <div class="content-card mt-4">
+                    <h3><i class="bi bi-people-fill"></i> Registered Users</h3>
+                    <div id="usersTableContainer">
+                        <p class="text-muted">Loading users...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timetable Section -->
+            <div id="timetable-section" class="page-section">
+                <div class="section-header">
+                    <h2><i class="bi bi-calendar3"></i> Timetable Management</h2>
+                    <p>Manage batches and create efficient timetables</p>
+                </div>
+
+                <!-- Batch Management Section -->
+                <div class="content-card mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h3><i class="bi bi-collection"></i> Batch Management</h3>
+                            <p class="text-muted mb-0">Create batches first, then assign timetables to them</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="showBatchFormModal()">
+                            <i class="bi bi-plus-circle me-2"></i>Create New Batch
+                        </button>
+                    </div>
+                    <div id="batchesListContainer">
+                        <div class="text-center p-4">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading batches...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timetable Editor -->
+                <div class="content-card mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h3><i class="bi bi-table"></i> Timetable Editor</h3>
+                            <p class="text-muted mb-0">Select a batch to view and edit its timetable in calendar format
+                            </p>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <select class="form-select" id="timetableBatchSelector" style="width: auto;">
+                                <option value="">Select Batch to Edit...</option>
+                            </select>
+                            <button class="btn btn-outline-primary" onclick="refreshTimetable()">
+                                <i class="bi bi-arrow-clockwise"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="timetableCalendarContainer">
+                        <div class="text-center p-5 text-muted">
+                            <i class="bi bi-calendar3 fs-1 mb-3 d-block"></i>
+                            <p>Select a batch above to view and edit its timetable</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add/Edit Timetable Entry Form -->
+                <div class="content-card">
+                    <h3><i class="bi bi-plus-circle"></i> Add Timetable Entry</h3>
+                    <p class="text-muted">Create a new class slot (duplicates will be detected automatically)</p>
+                    <form id="rescheduleForm">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Batch *</label>
+                                <select class="form-select" id="ttBatch" required>
+                                    <option value="" selected disabled>Select Batch...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Day *</label>
+                                <select class="form-select" id="ttDay" required>
+                                    <option value="">Select Day</option>
+                                    <option value="Monday">Monday</option>
+                                    <option value="Tuesday">Tuesday</option>
+                                    <option value="Wednesday">Wednesday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Friday">Friday</option>
+                                    <option value="Saturday">Saturday</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Subject Name *</label>
+                                <input type="text" class="form-control" id="ttSubject"
+                                    placeholder="e.g. Data Structures" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Start Time *</label>
+                                <input type="time" class="form-control" id="ttStartTime" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">End Time *</label>
+                                <input type="time" class="form-control" id="ttEndTime" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Teacher *</label>
+                                <select class="form-select" id="ttTeacher" required>
+                                    <option selected disabled>Select Faculty...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label">Room</label>
+                                <input type="text" class="form-control" id="ttRoom" placeholder="e.g. Room 101">
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary flex-grow-1">
+                                <i class="bi bi-check-circle me-2"></i>Add to Timetable
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary" onclick="clearTimetableForm()">
+                                <i class="bi bi-x-circle me-2"></i>Clear
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div id="reports-section" class="page-section">
+                <div class="section-header">
+                    <h2><i class="bi bi-graph-up"></i> Reports & Analytics</h2>
+                    <p>System statistics and performance metrics</p>
+                </div>
+
+                <div class="content-card">
+                    <h3><i class="bi bi-megaphone-fill"></i> Issue Notices</h3>
+                    <form id="noticeForm">
+                        <div class="mb-3">
+                            <label class="form-label">Notice Title</label>
+                            <input type="text" class="form-control" id="noticeTitle" required
+                                placeholder="Enter notice title">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Message / Details</label>
+                            <textarea class="form-control" id="noticeMsg" rows="4" required
+                                placeholder="Enter notice details..."></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Priority</label>
+                                <select class="form-select" id="noticePriority">
+                                    <option value="low">Low</option>
+                                    <option value="medium" selected>Normal</option>
+                                    <option value="high">High / Urgent</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Target Audience</label>
+                                <select class="form-select" id="noticeTarget">
+                                    <option value="All">Everyone</option>
+                                    <option value="Faculty">Faculty Only</option>
+                                    <option value="Students">Students Only</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-send me-2"></i>Post Notice
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Sent Notices List -->
+                <div class="content-card mt-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h3><i class="bi bi-list-check"></i> Sent Notices</h3>
+                        <button class="btn btn-sm btn-outline-primary" onclick="loadSentNotices()">
+                            <i class="bi bi-arrow-clockwise"></i> Refresh
+                        </button>
+                    </div>
+                    <div id="sentNoticesContainer">
+                        <p class="text-muted text-center p-4">Loading notices...</p>
+                    </div>
+                </div>
+
+                <div class="content-card mt-4">
+                    <h3><i class="bi bi-book-half"></i> Faculty Subject Allocation</h3>
+                    <form id="subjectForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Select Faculty</label>
+                                <select class="form-select" id="subFaculty" required>
+                                    <option disabled selected>Select Faculty...</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Subject Name</label>
+                                <input type="text" class="form-control" id="subName"
+                                    placeholder="e.g. Operating Systems" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="bi bi-check-circle me-2"></i>Assign Subject
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Profile Section -->
+            <div id="profile-section" class="page-section">
+                <div class="section-header">
+                    <h2><i class="bi bi-person-circle"></i> Profile Settings</h2>
+                    <p>Manage your account information</p>
+                </div>
+
+                <div class="content-card">
+                    <h3><i class="bi bi-person-fill"></i> Admin Profile</h3>
+                    <form id="profileForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="profileName" value="" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" id="profileEmail" value="" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Phone</label>
+                                <input type="tel" class="form-control" id="profilePhone" value="">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Department</label>
+                                <input type="text" class="form-control" id="profileDept" value="">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle me-2"></i>Update Profile
+                        </button>
+                    </form>
+                </div>
+
+                <div class="content-card mt-4">
+                    <h3><i class="bi bi-key-fill"></i> Change Password</h3>
+                    <form id="changePasswordForm">
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Current Password</label>
+                                <input type="password" class="form-control" id="currentPassword" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">New Password</label>
+                                <input type="password" class="form-control" id="newPassword" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirmPassword" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-warning">
+                            <i class="bi bi-shield-lock me-2"></i>Change Password
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings-section" class="page-section">
+                <div class="section-header">
+                    <h2><i class="bi bi-gear-fill"></i> System Settings</h2>
+                    <p>Configure system preferences and behavior</p>
+                </div>
+
+                <div class="content-card">
+                    <h3><i class="bi bi-clock-fill"></i> Attendance Settings</h3>
+                    <form id="attendanceSettingsForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Default Session Duration (minutes)</label>
+                                <input type="number" class="form-control" id="sessionDuration" value="60">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Late Mark Threshold (minutes)</label>
+                                <input type="number" class="form-control" id="lateThreshold" value="15">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Attendance Verification Method</label>
+                                <select class="form-select" id="verificationMethod">
+                                    <option value="face">Face Recognition</option>
+                                    <option value="geofence">Geofencing</option>
+                                    <option value="both" selected>Face + Geofencing</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Auto-close Sessions After (minutes)</label>
+                                <input type="number" class="form-control" id="autoClose" value="120">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle me-2"></i>Save Settings
+                        </button>
+                    </form>
+                </div>
+
+                <div class="content-card mt-4">
+                    <h3><i class="bi bi-bell-fill"></i> Notification Settings</h3>
+                    <form id="notificationSettingsForm">
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                            <label class="form-check-label" for="emailNotifications">
+                                Email Notifications
+                            </label>
+                        </div>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="smsNotifications">
+                            <label class="form-check-label" for="smsNotifications">
+                                SMS Notifications
+                            </label>
+                        </div>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="pushNotifications" checked>
+                            <label class="form-check-label" for="pushNotifications">
+                                Push Notifications
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-info">
+                            <i class="bi bi-check-circle me-2"></i>Save Notification Settings
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Geofencing Section -->
+            <div id="geofencing-section" class="page-section">
+                <div class="section-header">
+                    <h2><i class="bi bi-geo-alt-fill"></i> Geofencing Management</h2>
+                    <p>Configure location-based attendance boundaries</p>
+                </div>
+
+                <div class="content-card">
+                    <h3><i class="bi bi-map-fill"></i> Active Geofences</h3>
+                    <div id="geofenceList" class="mb-3">
+                        <p class="text-muted">Loading geofences...</p>
+                    </div>
+                    <button class="btn btn-success" onclick="showAddGeofenceForm()">
+                        <i class="bi bi-plus-circle me-2"></i>Add New Geofence
+                    </button>
+                </div>
+
+                <div class="content-card mt-4" id="addGeofenceCard" style="display: none;">
+                    <h3><i class="bi bi-plus-circle-fill"></i> Create New Geofence</h3>
+                    <form id="geofenceForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Location Name</label>
+                                <input type="text" class="form-control" id="geofenceName"
+                                    placeholder="e.g., Main Campus" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Radius (meters)</label>
+                                <input type="number" class="form-control" id="geofenceRadius" placeholder="100"
+                                    value="100" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Latitude</label>
+                                <input type="number" step="any" class="form-control" id="geofenceLat"
+                                    placeholder="28.7041" required>
+                                <small class="text-muted">Get from map or device</small>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Longitude</label>
+                                <input type="number" step="any" class="form-control" id="geofenceLng"
+                                    placeholder="77.1025" required>
+                                <small class="text-muted">Get from map or device</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" id="geofenceDesc" rows="2"
+                                placeholder="Optional description"></textarea>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-secondary" onclick="getCurrentLocation()">
+                                <i class="bi bi-crosshair me-2"></i>Use Current Location
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle me-2"></i>Create Geofence
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary" onclick="hideAddGeofenceForm()">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="content-card mt-4">
+                    <h3><i class="bi bi-activity"></i> Geofence Activity Log</h3>
+                    <div id="geofenceActivity" class="table-responsive">
+                        <p class="text-muted">Loading activity...</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/socket.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/admin-dashboard.js"></script>
+    <script src="../assets/js/chatbot.js"></script>
+</body>
+
+</html>

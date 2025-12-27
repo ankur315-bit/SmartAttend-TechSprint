@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Smart Campus</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-purple: #8B7FD8;
+            --accent-purple: #C7BFEC;
+            --deep-purple: #6A5ACD;
+            --light-purple: #F0EEFF;
+            --dark-text: #2C2653;
+            --soft-gray: #F8F9FC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--light-purple) 0%, var(--soft-gray) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background elements */
+        .bg-decoration {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-circle-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary-purple);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .bg-circle-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--deep-purple);
+            bottom: -50px;
+            left: -50px;
+            animation-delay: 5s;
+        }
+
+        .bg-circle-3 {
+            width: 200px;
+            height: 200px;
+            background: var(--accent-purple);
+            top: 50%;
+            right: 10%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px) scale(1);
+            }
+
+            25% {
+                transform: translateY(-30px) translateX(20px) scale(1.05);
+            }
+
+            50% {
+                transform: translateY(0px) translateX(-20px) scale(1);
+            }
+
+            75% {
+                transform: translateY(30px) translateX(10px) scale(0.95);
+            }
+        }
+
+        .error-container {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .error-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 4rem 3rem;
+            box-shadow: 0 20px 60px rgba(139, 127, 216, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .error-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .brain-illustration {
+            font-size: 120px;
+            animation: pulse 2s infinite ease-in-out;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-purple), var(--deep-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-purple), var(--deep-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 1rem;
+            letter-spacing: -5px;
+        }
+
+        .error-title {
+            color: var(--dark-text);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .error-message {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-home,
+        .btn-back {
+            padding: 1rem 2.5rem;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-home {
+            background: linear-gradient(135deg, var(--primary-purple), var(--deep-purple));
+            color: white;
+            box-shadow: 0 8px 20px rgba(139, 127, 216, 0.3);
+        }
+
+        .btn-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(139, 127, 216, 0.4);
+            color: white;
+        }
+
+        .btn-back {
+            background: white;
+            color: var(--primary-purple);
+            border: 2px solid var(--primary-purple);
+        }
+
+        .btn-back:hover {
+            background: var(--light-purple);
+            transform: translateY(-2px);
+            color: var(--deep-purple);
+        }
+
+        .suggestions {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(139, 127, 216, 0.1);
+        }
+
+        .suggestions h3 {
+            color: var(--dark-text);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .suggestion-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .suggestion-link {
+            padding: 0.75rem 1.5rem;
+            background: var(--light-purple);
+            color: var(--primary-purple);
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .suggestion-link:hover {
+            background: var(--primary-purple);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 5rem;
+            }
+
+            .error-title {
+                font-size: 1.5rem;
+            }
+
+            .error-message {
+                font-size: 1rem;
+            }
+
+            .brain-illustration {
+                font-size: 80px;
+            }
+
+            .error-card {
+                padding: 3rem 2rem;
+            }
+
+            .btn-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .bg-circle-1,
+            .bg-circle-2,
+            .bg-circle-3 {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background Elements -->
+    <div class="bg-decoration bg-circle-1"></div>
+    <div class="bg-decoration bg-circle-2"></div>
+    <div class="bg-decoration bg-circle-3"></div>
+
+    <div class="error-container">
+        <div class="error-card">
+            <div class="brain-illustration">
+                <i class="bi bi-exclamation-triangle"></i>
+            </div>
+            <div class="error-code">404</div>
+            <h1 class="error-title">Oops! Page Not Found</h1>
+            <p class="error-message">
+                The page you're looking for seems to have wandered off. Don't worry, even the smartest brains sometimes
+                take a wrong turn!
+            </p>
+
+            <div class="btn-container">
+                <a href="/" class="btn-home">
+                    <i class="bi bi-house-door"></i>
+                    Back to Home
+                </a>
+                <button onclick="history.back()" class="btn-back">
+                    <i class="bi bi-arrow-left"></i>
+                    Go Back
+                </button>
+            </div>
+
+            <div class="suggestions">
+                <h3>Popular Pages</h3>
+                <div class="suggestion-links">
+                    <a href="/pages/login" class="suggestion-link">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        Login
+                    </a>
+                    <a href="/pages/student-dashboard" class="suggestion-link">
+                        <i class="bi bi-person"></i>
+                        Student Portal
+                    </a>
+                    <a href="/pages/faculty-dashboard" class="suggestion-link">
+                        <i class="bi bi-person-badge"></i>
+                        Faculty Portal
+                    </a>
+                    <a href="/pages/admin-dashboard" class="suggestion-link">
+                        <i class="bi bi-shield"></i>
+                        Admin Portal
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity - track mouse movement for subtle parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.error-card');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+
+            cards.forEach(card => {
+                const moveX = (mouseX - 0.5) * 20;
+                const moveY = (mouseY - 0.5) * 20;
+                card.style.transform = `perspective(1000px) rotateY(${moveX}deg) rotateX(${-moveY}deg) translateY(-5px)`;
+            });
+        });
+
+        // Reset transform when mouse leaves
+        document.addEventListener('mouseleave', () => {
+            const cards = document.querySelectorAll('.error-card');
+            cards.forEach(card => {
+                card.style.transform = '';
+            });
+        });
+    </script>
+</body>
+
+</html>

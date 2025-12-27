@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartAttend - Intelligent Attendance System</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/modern.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <div class="top-nav">
+        <div class="brand-section">
+            <div class="brand-icon">SA</div>
+            <div class="brand-name">SmartAttend</div>
+        </div>
+        <div class="nav-links d-none d-lg-flex">
+            <a href="#" class="nav-link active"><i class="bi bi-grid-3x3-gap"></i> Dashboard</a>
+            <a href="#features" class="nav-link"><i class="bi bi-lightning-charge"></i> Features</a>
+            <a href="#about" class="nav-link"><i class="bi bi-info-circle"></i> About</a>
+        </div>
+        <div class="nav-right">
+            <button class="icon-btn"><i class="bi bi-gear"></i></button>
+            <button class="icon-btn"><i class="bi bi-bell"></i></button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <div class="greeting-text">
+                    Hello <strong>there</strong> <span class="emoji">👋</span><br>
+                    Welcome to <strong>SmartAttend</strong>
+                </div>
+
+                <!-- Role Selection Grid -->
+                <div class="roles-grid">
+                    
+                    <a href="pages/login?role=faculty" class="role-card faculty">
+                        <div class="role-icon-box">
+                            <i class="bi bi-person-video3"></i>
+                        </div>
+                        <h3>Faculty</h3>
+                        <p>Manage classes, start attendance sessions, and track student participation in real-time</p>
+                        <div class="role-status">
+                            Status: <strong>Ready</strong>
+                        </div>
+                    </a>
+
+                    <a href="pages/login?role=student" class="role-card student">
+                        <div class="role-icon-box">
+                            <i class="bi bi-backpack4-fill"></i>
+                        </div>
+                        <h3>Student</h3>
+                        <p>Mark attendance with face verification, view history, and access analytics dashboard</p>
+                        <div class="role-status">
+                            Status: <strong>Active</strong>
+                        </div>
+                    </a>
+
+                    <a href="pages/login?role=admin" class="role-card admin">
+                        <div class="role-icon-box">
+                            <i class="bi bi-shield-lock-fill"></i>
+                        </div>
+                        <h3>Administrator</h3>
+                        <p>Complete system control, user management, and advanced configuration settings</p>
+                        <div class="role-status">
+                            Status: <strong>Secure</strong>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features-section" id="features">
+            <div class="section-header">
+                <div class="section-title">Powerful Features</div>
+            </div>
+
+            <div class="features-grid">
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-camera-fill"></i>
+                    </div>
+                    <h4>Face Recognition</h4>
+                    <p>AI-powered biometric verification</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </div>
+                    <h4>Geofencing</h4>
+                    <p>Location-based attendance tracking</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+                    <h4>Analytics</h4>
+                    <p>Real-time insights and reports</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-bell-fill"></i>
+                    </div>
+                    <h4>Notifications</h4>
+                    <p>Smart alerts and reminders</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2025 SmartAttend • Built with care for modern education</p>
+    </div>
+
+</body>
+
+</html>
